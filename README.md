@@ -4,7 +4,7 @@
 
 BuilderMaster é uma lib que vai criar Builders para as suas entidades. Utiliza conceitos como *DataBuilder*, *Method Chaining* e *Fluent Interface*.
 
-Para gerar os códigos para uma classe, adicione o jar no classpath do seu código e faça a seguinte chamada:
+Para gerar os códigos para uma classe, adicione o [jar](https://github.com/wcaquino/BuilderMaster/blob/master/builderMaster.jar) no classpath do seu código e faça a seguinte chamada:
 
 ```
 new BuilderMaster().gerarCodigoClasse(SuaClasse.class);
