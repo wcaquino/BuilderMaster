@@ -1,4 +1,4 @@
-package buildermaster;
+package br.ce.wcaquino.buildermaster;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -9,15 +9,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Classe responsável pela criação de builders de entidades
+ * 
+ * @author wcaquino
+ *
+ */
 public class BuilderMaster {
 
 	Set<String> listaImports;
 	
 	public BuilderMaster() {
 		listaImports = new HashSet<String>();
-		listaImports.add("import java.util.List;");
-		listaImports.add("import java.util.Collections;");
-		listaImports.add("import java.util.ArrayList;");
+		listaImports.add("import java.util.Arrays;");
+//		listaImports.add("import java.util.Collections;");
+//		listaImports.add("import java.util.ArrayList;");
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -66,14 +72,14 @@ public class BuilderMaster {
 					.append(nomeClasse)
 					.append(" comLista").append(campo.getName().substring(0, 1).toUpperCase()).append(campo.getName().substring(1))
 					.append("(").append(((Class)stringListType.getActualTypeArguments()[0]).getSimpleName()).append("... params) {\n");
-//				List<elemType> lista = new ArrayList<elemType>();
-				builder.append("\t\tList<").append(((Class)stringListType.getActualTypeArguments()[0]).getSimpleName()).append("> lista = new ArrayList<")
-					.append(((Class)stringListType.getActualTypeArguments()[0]).getSimpleName()).append(">();\n");
-				registrarImports(((Class)stringListType.getActualTypeArguments()[0]).getName());
-//				Collections.addAll(lista, args);
-				builder.append("\t\tCollections.addAll(lista, params);\n");
-//				elemento.setelemTypes(lista);
-				builder.append("\t\telemento.set").append(campo.getName().substring(0, 1).toUpperCase()).append(campo.getName().substring(1)).append("(lista);\n");
+////				List<elemType> lista = new ArrayList<elemType>();
+//				builder.append("\t\tList<").append(((Class)stringListType.getActualTypeArguments()[0]).getSimpleName()).append("> lista = new ArrayList<")
+//					.append(((Class)stringListType.getActualTypeArguments()[0]).getSimpleName()).append(">();\n");
+//				registrarImports(((Class)stringListType.getActualTypeArguments()[0]).getName());
+////				Collections.addAll(lista, args);
+//				builder.append("\t\tCollections.addAll(lista, params);\n");
+////				elemento.setelemTypes(lista);
+				builder.append("\t\telemento.set").append(campo.getName().substring(0, 1).toUpperCase()).append(campo.getName().substring(1)).append("(Arrays.asList(params));\n");
 				
 				builder.append("\t\treturn this;\n");
 				builder.append("\t}\n\n");
